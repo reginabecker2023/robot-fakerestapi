@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231119 08:22:35.483" rpa="false" schemaversion="4">
+<suite id="s1" name="Tests" source="C:\QAx\work\robotJenkins\api\tests">
+<suite id="s1-s1" name="POST.API" source="C:\QAx\work\robotJenkins\api\tests\POST.API.robot">
+<test id="s1-s1-t1" name="New Session" line="5">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{payload}</var>
+<arg>id=1</arg>
+<arg>userName=Regina</arg>
+<arg>password=184999</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20231119 08:22:35.884" level="INFO">&amp;{payload} = { id=1 | userName=Regina | password=184999 }</msg>
+<status status="PASS" starttime="20231119 08:22:35.883" endtime="20231119 08:22:35.884"/>
+</kw>
+<kw name="Post Session" library="services">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>users</arg>
+<arg>${base_uri}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231119 08:22:35.886" level="INFO">Creating Session using : alias=users, url=http://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20231119 08:22:35.886" endtime="20231119 08:22:35.886"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20231119 08:22:35.887" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20231119 08:22:35.886" endtime="20231119 08:22:35.887"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>users</arg>
+<arg>/api/v1/Users</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231119 08:22:36.388" level="INFO">POST Request : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ path_url=/api/v1/Users 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '55'} 
+ body=b'{"id": "1", "userName": "Regina", "password": "184999"}' 
+ </msg>
+<msg timestamp="20231119 08:22:36.388" level="INFO">POST Response : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Date': 'Sun, 19 Nov 2023 11:20:41 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'api-supported-versions': '1.0'} 
+ body={"id":1,"userName":"Regina","password":"184999"} 
+ </msg>
+<msg timestamp="20231119 08:22:36.389" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:35.887" endtime="20231119 08:22:36.389"/>
+</kw>
+<msg timestamp="20231119 08:22:36.389" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:35.885" endtime="20231119 08:22:36.389"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231119 08:22:36.389" endtime="20231119 08:22:36.390"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231119 08:22:36.390" endtime="20231119 08:22:36.391"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20231119 08:22:36.392" endtime="20231119 08:22:36.392"/>
+</kw>
+<status status="PASS" starttime="20231119 08:22:35.882" endtime="20231119 08:22:36.392"/>
+</test>
+<test id="s1-s1-t2" name="Empty Name" line="14">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{payload}</var>
+<arg>id=1</arg>
+<arg>userName=${EMPTY}</arg>
+<arg>password=184999</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20231119 08:22:36.395" level="INFO">&amp;{payload} = { id=1 | userName= | password=184999 }</msg>
+<status status="PASS" starttime="20231119 08:22:36.394" endtime="20231119 08:22:36.396"/>
+</kw>
+<kw name="Post Session" library="services">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>users</arg>
+<arg>${base_uri}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231119 08:22:36.397" level="INFO">Creating Session using : alias=users, url=http://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20231119 08:22:36.397" endtime="20231119 08:22:36.398"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20231119 08:22:36.398" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20231119 08:22:36.398" endtime="20231119 08:22:36.398"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>users</arg>
+<arg>/api/v1/Users</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231119 08:22:36.869" level="INFO">POST Request : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ path_url=/api/v1/Users 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '49'} 
+ body=b'{"id": "1", "userName": "", "password": "184999"}' 
+ </msg>
+<msg timestamp="20231119 08:22:36.870" level="INFO">POST Response : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Date': 'Sun, 19 Nov 2023 11:20:42 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'api-supported-versions': '1.0'} 
+ body={"id":1,"userName":"","password":"184999"} 
+ </msg>
+<msg timestamp="20231119 08:22:36.870" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:36.398" endtime="20231119 08:22:36.870"/>
+</kw>
+<msg timestamp="20231119 08:22:36.870" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:36.396" endtime="20231119 08:22:36.870"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231119 08:22:36.870" endtime="20231119 08:22:36.871"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231119 08:22:36.872" endtime="20231119 08:22:36.873"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20231119 08:22:36.874" endtime="20231119 08:22:36.874"/>
+</kw>
+<status status="PASS" starttime="20231119 08:22:36.393" endtime="20231119 08:22:36.874"/>
+</test>
+<test id="s1-s1-t3" name="Without Json" line="23">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20231119 08:22:36.876" level="INFO">&amp;{payload} = { }</msg>
+<status status="PASS" starttime="20231119 08:22:36.876" endtime="20231119 08:22:36.876"/>
+</kw>
+<kw name="Post Session" library="services">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>users</arg>
+<arg>${base_uri}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231119 08:22:36.877" level="INFO">Creating Session using : alias=users, url=http://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20231119 08:22:36.877" endtime="20231119 08:22:36.877"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20231119 08:22:36.877" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20231119 08:22:36.877" endtime="20231119 08:22:36.877"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>users</arg>
+<arg>/api/v1/Users</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231119 08:22:37.325" level="INFO">POST Request : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ path_url=/api/v1/Users 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '2'} 
+ body=b'{}' 
+ </msg>
+<msg timestamp="20231119 08:22:37.326" level="INFO">POST Response : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Date': 'Sun, 19 Nov 2023 11:20:42 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'api-supported-versions': '1.0'} 
+ body={"id":0,"userName":null,"password":null} 
+ </msg>
+<msg timestamp="20231119 08:22:37.326" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:36.878" endtime="20231119 08:22:37.326"/>
+</kw>
+<msg timestamp="20231119 08:22:37.326" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:36.876" endtime="20231119 08:22:37.326"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20231119 08:22:37.356" endtime="20231119 08:22:37.357"/>
+</kw>
+<status status="PASS" starttime="20231119 08:22:36.875" endtime="20231119 08:22:37.364"/>
+</test>
+<status status="PASS" starttime="20231119 08:22:35.542" endtime="20231119 08:22:37.367"/>
+</suite>
+<suite id="s1-s2" name="Users" source="C:\QAx\work\robotJenkins\api\tests\Users">
+<suite id="s1-s2-s1" name="GET.API" source="C:\QAx\work\robotJenkins\api\tests\Users\GET.API.robot">
+<test id="s1-s2-s1-t1" name="Get Request Users" line="6">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>users</arg>
+<arg>${base_uri}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231119 08:22:37.415" level="INFO">Creating Session using : alias=users, url=http://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20231119 08:22:37.415" endtime="20231119 08:22:37.416"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${resp_users}</var>
+<arg>users</arg>
+<arg>/api/v1/Users</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20231119 08:22:37.908" level="INFO">GET Request : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ path_url=/api/v1/Users 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20231119 08:22:37.908" level="INFO">GET Response : url=http://fakerestapi.azurewebsites.net/api/v1/Users 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Date': 'Sun, 19 Nov 2023 11:20:43 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'api-supported-versions': '1.0'} 
+ body=[{"id":1,"userName":"User 1","password":"Password1"},{"id":2,"userName":"User 2","password":"Password2"},{"id":3,"userName":"User 3","password":"Password3"},{"id":4,"userName":"User 4","password":"Password4"},{"id":5,"userName":"User 5","password":"Password5"},{"id":6,"userName":"User 6","password":"Password6"},{"id":7,"userName":"User 7","password":"Password7"},{"id":8,"userName":"User 8","password":"Password8"},{"id":9,"userName":"User 9","password":"Password9"},{"id":10,"userName":"User 10","password":"Password10"}] 
+ </msg>
+<msg timestamp="20231119 08:22:37.909" level="INFO">${resp_users} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231119 08:22:37.416" endtime="20231119 08:22:37.909"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${code}</var>
+<arg>${resp_users.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20231119 08:22:37.911" level="INFO">${code} = 200</msg>
+<status status="PASS" starttime="20231119 08:22:37.909" endtime="20231119 08:22:37.911"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20231119 08:22:37.911" endtime="20231119 08:22:37.912"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp_users.reason}</arg>
+<arg>OK</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231119 08:22:37.912" endtime="20231119 08:22:37.914"/>
+</kw>
+<status status="PASS" starttime="20231119 08:22:37.414" endtime="20231119 08:22:37.914"/>
+</test>
+<status status="PASS" starttime="20231119 08:22:37.394" endtime="20231119 08:22:37.916"/>
+</suite>
+<status status="PASS" starttime="20231119 08:22:37.370" endtime="20231119 08:22:37.918"/>
+</suite>
+<status status="PASS" starttime="20231119 08:22:35.486" endtime="20231119 08:22:37.919"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s1" name="POST.API">Tests.POST.API</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2" name="Users">Tests.Users</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2-s1" name="GET.API">Tests.Users.GET.API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
