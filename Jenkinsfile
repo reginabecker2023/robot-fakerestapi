@@ -4,15 +4,14 @@ pipeline {
             image "python:3.12.0-alpine3.18"
         }
     }
-
     stages {
         stage('Preparation') {
-            Steps {
+            steps {
                 sh 'pip install -r requirements.txt'
             }
         }
         stage('Test')  {
-            Steps {
+            steps {
                 sh 'robot -d ./logs tests'
             }                
         }
