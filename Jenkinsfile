@@ -13,7 +13,12 @@ pipeline {
         stage('Test')  {
             steps {
                 sh 'robot -d ./logs tests'
-            }                
+            }  
+            post {
+                always {
+                    robot "logs"
+                }
+            }              
         }
     }
 }
